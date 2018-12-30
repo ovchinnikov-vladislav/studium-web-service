@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+                "-//Hibernate/Hibernate Configuration DTD//EN"
+                "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ikas?autoReconnect=true</property>
+        <property name="hibernate.connection.username">mysql</property>
+        <property name="hibernate.connection.password">mysql</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.transaction.auto_close_session">true</property>
+
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">50</property>
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <property name="hibernate.c3p0.preferredTestQuery">select 1</property>
+        <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+
+        <mapping class="ru.kamchatgtu.studium.entity.Position"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Group"/>
+        <mapping class="ru.kamchatgtu.studium.entity.User"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Subject"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Answer"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Question"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Theme"/>
+        <mapping class="ru.kamchatgtu.studium.entity.Test"/>
+        <mapping class="ru.kamchatgtu.studium.entity.ResultTest"/>
+        <mapping class="ru.kamchatgtu.studium.entity.ResultQuestion"/>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ru.kamchatgtu.studium</groupId>
+    <artifactId>studium-webservice</artifactId>
+    <version>0.0.1</version>
+
+    <name>Studium WebService</name>
+    <description>Веб сервис, который предназначен для получения информации из БД и передачи ее клиентам</description>
+
+    <organization>
+        <name>ФГБОУ "Камчатский Государственный Технический Университет</name>
+        <url>http://kamchatgtu.ru</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>1</id>
+            <name>Овчинников В.А.</name>
+            <organization>ФГБОУ "Камчатский Государственный Технический Университет</organization>
+            <email>vladovchinnikov950@gmail.com</email>
+        </developer>
+    </developers>
+
+    <build>
+        <finalName>Studium WebService</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/StudiumWebService</path>
+                    <port>8080</port>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <properties>
+        <servlet.group>javax.servlet</servlet.group>
+        <serlvet.version>3.1.0</serlvet.version>
+        <mail.group>javax.mail</mail.group>
+        <mail.version>1.4.7</mail.version>
+        <hibernate.group>org.hibernate</hibernate.group>
+        <hibernate.version>5.3.7.Final</hibernate.version>
+        <c3p0.group>com.mchange</c3p0.group>
+        <c3p0.version>0.9.5.2</c3p0.version>
+        <jackson.group>com.fasterxml.jackson.core</jackson.group>
+        <jackson.version>2.9.7</jackson.version>
+        <spring.group>org.springframework</spring.group>
+        <spring.security.group>org.springframework.security</spring.security.group>
+        <spring.version>5.0.0.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>${servlet.group}</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${serlvet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>${hibernate.group}</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${hibernate.group}</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${hibernate.group}</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${spring.group}</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${spring.group}</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${spring.group}</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${spring.security.group}</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${spring.security.group}</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${jackson.group}</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${jackson.group}</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${c3p0.group}</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>${c3p0.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${mail.group}</groupId>
+            <artifactId>mail</artifactId>
+            <version>${mail.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
