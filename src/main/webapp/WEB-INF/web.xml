@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Файл конфигурирования веб-службы - настройка сервлета для запуска, подключение необходимых фильтров -->
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- Имя веб-сервиса -->
     <display-name>Studium WebService</display-name>
 
+    <!-- Конфигурирование сервлета -->
     <servlet>
+        <!-- Имя сервлета -->
         <servlet-name>restful</servlet-name>
+        <!-- Класс для запуска сервлета -->
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
+            <!-- Имя параметра конфигурирования -->
             <param-name>contextConfigLocation</param-name>
+            <!-- Значение параметра конфигурирования -->
             <param-value>
                 WEB-INF/spring/rest-context.xml
             </param-value>
@@ -18,21 +25,29 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <!-- Привязка сервлета -->
     <servlet-mapping>
+        <!-- Имя сервлета -->
         <servlet-name>restful</servlet-name>
+        <!-- Адрес сервлета -->
         <url-pattern>/restful/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Конфигурирования фильтра для аутентификации -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
 
+    <!-- Привязка фильтрая для аутентификации -->
     <filter-mapping>
+        <!-- Имя фильтра -->
         <filter-name>springSecurityFilterChain</filter-name>
+        <!-- Адрес фильтра -->
         <url-pattern>/restful/*</url-pattern>
     </filter-mapping>
 
+    <!-- Конфигурирование фильтра кодировки -->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -45,6 +60,8 @@
             <param-value>true</param-value>
         </init-param>
     </filter>
+
+    <!-- Привязка фильтра кодировки -->
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/restful/*</url-pattern>

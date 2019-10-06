@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Файл конфигурации аутентификации при доступе к веб-сервису -->
 <beans:beans xmlns="http://www.springframework.org/schema/security"
     xmlns:beans="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -7,12 +8,14 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <!-- Установка доступа и прав доступа, а также роли -->
     <http pattern="/restful/**" create-session="stateless">
         <csrf disabled="true"/> <!-- Для разрешения POST, DELETE, PUT и т.д. -->
         <intercept-url pattern="/**" access="hasRole('ROLE_REMOTE')"/>
         <http-basic/>
     </http>
 
+    <!-- Создание пользователя с помощью менеджера аутентификации с ролью ROLE_REMOTE -->
     <authentication-manager>
         <authentication-provider>
             <user-service>

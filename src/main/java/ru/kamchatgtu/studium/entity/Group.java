@@ -3,86 +3,117 @@ package ru.kamchatgtu.studium.entity;
 import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.Collection;
 
+/**
+ * Объект класса {@code Group} моделирует группу пользователя
+ * @author Овчинников В.А.
+ */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "`Group`")
-public class Group {
+public class Group implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_group")
     private Integer idGroup;
 
-    @Column(name = "name_group")
-    private String nameGroup;
+    @Column(name = "group_name")
+    private String groupName;
 
-    @Column(name = "direction")
-    private String direction;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_role")
+    private Role role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_position")
-    private Position position;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_direction")
+    private Direction direction;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
-    private Set<User> users;
-
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "group_subject",
-            joinColumns = { @JoinColumn(name = "id_group")},
-            inverseJoinColumns = {@JoinColumn(name = "id_subject")})
-    private Set<Subject> subjects;
+    private Collection<User> users;
 
     public Group() {}
 
+    /**
+     * Метод получения id группы
+     * @return возращает id группы
+     */
     public Integer getIdGroup() {
         return idGroup;
     }
 
+    /**
+     * Метод установки id группы
+     * @param idGroup id группы
+     */
     public void setIdGroup(Integer idGroup) {
         this.idGroup = idGroup;
     }
 
-    public String getNameGroup() {
-        return nameGroup;
+    /**
+     * Метод получения имени группы
+     * @return возвращает имя группы
+     */
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setNameGroup(String nameGroup) {
-        this.nameGroup = nameGroup;
+    /**
+     * Метод установки имени группы
+     * @param groupName имя группы
+     */
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public String getDirection() {
+    /**
+     * Метод получения направления подготовки группы
+     * @return возращает направление подготовки
+     */
+    public Direction getDirection() {
         return direction;
     }
 
-    public void setDirection(String direction) {
+    /**
+     * Метод установки направления подготовки группы
+     * @param direction направление подготовки группы
+     */
+    public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
-    public Set<User> getUsers() {
+    /**
+     * Метод получения роли группы
+     * @return возращает роль группы
+     */
+    public Role getRole() {
+        return role;
+    }
+
+    /**
+     * Метод установки роли группы
+     * @param role роль группы
+     */
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    /**
+     * Метод получения пользователей группы
+     * @return возращает множество пользователей группы
+     */
+    public Collection<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    /**
+     * Метод установки пользователей группы
+     * @param users множество пользователей группы
+     */
+    public void setUsers(Collection<User> users) {
         this.users = users;
-    }
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 }

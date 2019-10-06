@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="StudiumWebService">
-    <output-path>$PROJECT_DIR$/out/artifacts/StudiumWebService</output-path>
-    <root id="archive" name="StudiumWebService.war">
-      <element id="artifact" artifact-name="StudiumWebServiceExploaded" />
-    </root>
-  </artifact>
-</component>

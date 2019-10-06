@@ -3,32 +3,69 @@
                 "-//Hibernate/Hibernate Configuration DTD//EN"
                 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
+<!-- Файл конфигурации Hibernate - подключение к БД, конфигурирование соединения и присоединение сущностей -->
 <hibernate-configuration>
+    <!-- Конфигурирование SessionFactory -->
     <session-factory>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ikas?autoReconnect=true</property>
+        <!-- Подключение драйвера коннектора к СУБД MySQL -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- Адрес базы данных MySQL с установленым флагом autoReconnect -->
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/studium?autoReconnect=true</property>
+        <!-- Имя пользователя СУБД -->
         <property name="hibernate.connection.username">mysql</property>
+        <!-- Пароль пользователя СУБД -->
         <property name="hibernate.connection.password">mysql</property>
+        <!-- Диалект SQL -->
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!-- Устраняет LazyInitializeException  -->
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <!-- Автоматическое закрытие сеанса после завершение транзакции -->
         <property name="hibernate.transaction.auto_close_session">true</property>
+        <!-- Показать SQL запросы в консоли -->
+        <property name="hibernate.show_sql">true</property>
+        <!-- Использование диалекта метаданных вместо соединения -->
+        <property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
 
+        <!-- Минимальное количество соединений -->
         <property name="hibernate.c3p0.min_size">5</property>
-        <property name="hibernate.c3p0.max_size">20</property>
-        <property name="hibernate.c3p0.timeout">50</property>
+        <!-- Максимальное количество соединений -->
+        <property name="hibernate.c3p0.max_size">100</property>
+        <!-- Количество секунд, в течении которых неиспользуемое соединение будет сохраняться перед удалением -->
+        <property name="hibernate.c3p0.timeout">10</property>
+        <!-- Максимальный размер глобального кэша -->
         <property name="hibernate.c3p0.max_statements">50</property>
+        <!-- Проверка соединения на предмет его корректности -->
         <property name="hibernate.c3p0.idle_test_period">3000</property>
+        <!-- Тестовый запрос для поддержки соединения -->
         <property name="hibernate.c3p0.preferredTestQuery">select 1</property>
+        <!-- Обеспечивает активное подключение перед использованием -->
         <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
 
-        <mapping class="ru.kamchatgtu.studium.entity.Position"/>
-        <mapping class="ru.kamchatgtu.studium.entity.Group"/>
-        <mapping class="ru.kamchatgtu.studium.entity.User"/>
-        <mapping class="ru.kamchatgtu.studium.entity.Subject"/>
+        <!-- Ответ -->
         <mapping class="ru.kamchatgtu.studium.entity.Answer"/>
+        <!-- Направление подготовки -->
+        <mapping class="ru.kamchatgtu.studium.entity.Direction"/>
+        <!-- Факультет -->
+        <mapping class="ru.kamchatgtu.studium.entity.Faculty"/>
+        <!-- Группа -->
+        <mapping class="ru.kamchatgtu.studium.entity.Group"/>
+        <!-- Вопрос -->
         <mapping class="ru.kamchatgtu.studium.entity.Question"/>
-        <mapping class="ru.kamchatgtu.studium.entity.Theme"/>
-        <mapping class="ru.kamchatgtu.studium.entity.Test"/>
-        <mapping class="ru.kamchatgtu.studium.entity.ResultTest"/>
+        <!-- Результат по ответу на конкретный вопрос -->
         <mapping class="ru.kamchatgtu.studium.entity.ResultQuestion"/>
+        <!-- Результат по тесту -->
+        <mapping class="ru.kamchatgtu.studium.entity.ResultTest"/>
+        <!-- Роль -->
+        <mapping class="ru.kamchatgtu.studium.entity.Role"/>
+        <!-- Дисциплина -->
+        <mapping class="ru.kamchatgtu.studium.entity.Subject"/>
+        <!-- Тест -->
+        <mapping class="ru.kamchatgtu.studium.entity.Test"/>
+        <!-- Тема -->
+        <mapping class="ru.kamchatgtu.studium.entity.Theme"/>
+        <!-- Пользователь -->
+        <mapping class="ru.kamchatgtu.studium.entity.User"/>
+        <!-- Логи -->
+        <mapping class="ru.kamchatgtu.studium.entity.Log"/>
     </session-factory>
 </hibernate-configuration>

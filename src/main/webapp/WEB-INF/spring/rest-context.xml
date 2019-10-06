@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- Файл конфигурирования контекста веб-сервиса -->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
@@ -9,6 +10,8 @@
                             http://www.springframework.org/schema/context/spring-context.xsd
                             http://www.springframework.org/schema/mvc
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- Конфигурирование поддерживаемых форматов данных -->
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -35,9 +38,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- Сканер компонентов для контекта веб-сервиса с указанием базового пакета с классами RestController -->
     <context:component-scan base-package="ru.kamchatgtu.studium.rest"/>
 
+    <!-- Подключение компонента шифрования пароля -->
     <bean id ="passwordEncoder" class = "org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method = "getInstance" />
 
+    <!-- Импортирование конфигурации аутентификации при доступе к веб-сервису -->
     <import resource="web-security.xml"/>
 </beans>

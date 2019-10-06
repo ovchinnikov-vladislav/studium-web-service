@@ -3,34 +3,33 @@ package ru.kamchatgtu.studium.entity;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.*;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
 
+/**
+ * Объект класс {@code Question} моделирует вопрос
+ * @author Овчинников В.А.
+ */
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "question")
-public class Question {
+public class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_question")
     private Integer idQuestion;
 
-    @Column(name = "text_question")
-    private String textQuestion;
+    @Column(name = "question_text")
+    private String questionText;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_theme")
-    private Theme theme;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss a z")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "date_edit")
-    private Date dateReg;
+    private Date dateEdit;
 
-    @Column(name = "type_question")
-    private Byte typeQuestion;
+    @Column(name = "question_type")
+    private Byte questionType;
 
     @Column(name = "dir_image")
     private String dirImage;
@@ -41,105 +40,217 @@ public class Question {
     @Column(name = "dir_video")
     private String dirVideo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_user")
     private User user;
 
-    @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    private Set<Answer> answers;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_theme")
+    private Theme theme;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
-    private Set<ResultQuestion> resultQuestions;
+    private Collection<Answer> answers;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question")
+    private Collection<ResultQuestion> resultQuestions;
+
+    @JsonIgnore
+    @ManyToMany(targetEntity = Test.class, cascade = CascadeType.MERGE, mappedBy = "questions")
+    private Collection<Test> tests;
 
     public Question() {}
 
+    /**
+     * Метод получения id вопроса
+     * @return возвращает id вопроса
+     */
     public Integer getIdQuestion() {
         return idQuestion;
     }
 
+    /**
+     * Метод установки id вопроса
+     * @param idQuestion id вопроса
+     */
     public void setIdQuestion(Integer idQuestion) {
         this.idQuestion = idQuestion;
     }
 
-    public String getTextQuestion() {
-        return textQuestion;
+    /**
+     * Метод получения текста вопроса
+     * @return возращает текст вопроса
+     */
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setTextQuestion(String textQuestion) {
-        this.textQuestion = textQuestion;
+    /**
+     * Метод установки текста вопроса
+     * @param questionText текст вопроса
+     */
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
+    /**
+     * Метод получения темы вопроса
+     * @return возращает тему вопроса
+     */
     public Theme getTheme() {
         return theme;
     }
 
+    /**
+     * Метод установки темы вопроса
+     * @param theme тема вопроса
+     */
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
 
-    public Date getDateReg() {
-        return dateReg;
+    /**
+     * Метод получения даты редактирования
+     * @return возращает дату редактирования
+     */
+    public Date getDateEdit() {
+        return dateEdit;
     }
 
-    public void setDateReg(Date dateReg) {
-        this.dateReg = dateReg;
+    /**
+     * Метод установки даты редактирования
+     * @param dateEdit дата редактирования
+     */
+    public void setDateEdit(Date dateEdit) {
+        this.dateEdit = dateEdit;
     }
 
-    public Byte getTypeQuestion() {
-        return typeQuestion;
+    /**
+     * Метод получения типа вопроса
+     * @return возвращает тип вопроса
+     */
+    public Byte getQuestionType() {
+        return questionType;
     }
 
-    public void setTypeQuestion(Byte typeQuestion) {
-        this.typeQuestion = typeQuestion;
+    /**
+     * Метод установки типа вопроса
+     * @param questionType тип вопроса
+     */
+    public void setQuestionType(Byte questionType) {
+        this.questionType = questionType;
     }
 
+    /**
+     * Метод получения адреса изображения вопроса
+     * @return возвращает адрес изображение вопроса
+     */
     public String getDirImage() {
         return dirImage;
     }
 
+    /**
+     * Метод установки адреса изображения вопроса
+     * @param dirImage адрес изображения вопроса
+     */
     public void setDirImage(String dirImage) {
         this.dirImage = dirImage;
     }
 
+    /**
+     * Метод получения адреса аудио вопроса
+     * @return возращает адрсес аудио вопроса
+     */
     public String getDirAudio() {
         return dirAudio;
     }
 
+    /**
+     * Метод установки адреса аудио вопроса
+     * @param dirAudio адрес аудио вопроса
+     */
     public void setDirAudio(String dirAudio) {
         this.dirAudio = dirAudio;
     }
 
+    /**
+     * Метод получения адреса видео вопроса
+     * @return возращает адрес видео вопроса
+     */
     public String getDirVideo() {
         return dirVideo;
     }
 
+    /**
+     * Метод установки адреса видео вопроса
+     * @param dirVideo адрес видео вопроса
+     */
     public void setDirVideo(String dirVideo) {
         this.dirVideo = dirVideo;
     }
 
+    /**
+     * Метод получения пользователя, создавшего вопрос
+     * @return возращает пользователя, создавшего вопрос
+     */
     public User getUser() {
         return user;
     }
 
+    /**
+     * Метод установки пользователя, создавшего вопрос
+     * @param user пользователя, создавший вопрос
+     */
     public void setUser(User user) {
         this.user = user;
     }
 
-    public Set<Answer> getAnswers() {
+    /**
+     * Метод получения ответов на данный вопрос
+     * @return возращает коллекцию ответов на данный вопрос
+     */
+    public Collection<Answer> getAnswers() {
         return answers;
     }
 
-    public void setAnswers(Set<Answer> answers) {
+    /**
+     * Метод установки ответов на данный вопрос
+     * @param answers коллекция ответов на данный вопрос
+     */
+    public void setAnswers(Collection<Answer> answers) {
         this.answers = answers;
     }
 
-    public Set<ResultQuestion> getResultQuestions() {
+    /**
+     * Метод получения результов по ответам на данный вопрос
+     * @return возращает коллекцию результатов по ответам на данный вопрос
+     */
+    public Collection<ResultQuestion> getResultQuestions() {
         return resultQuestions;
     }
 
-    public void setResultQuestions(Set<ResultQuestion> resultQuestions) {
+    /**
+     * Метод установки результов по ответам на данный вопрос
+     * @param resultQuestions коллекция результов по ответам на данный вопрос
+     */
+    public void setResultQuestions(Collection<ResultQuestion> resultQuestions) {
         this.resultQuestions = resultQuestions;
+    }
+
+    /**
+     * Метод получения тестов, в которых содержится данный вопрос
+     * @return возращает коллекцию тестов, в которых содержится данный вопрос
+     */
+    public Collection<Test> getTests() {
+        return tests;
+    }
+
+    /**
+     * Метод установки тестов, в которых содержится данный вопрос
+     * @param tests коллекция тестов, в которых содержится данный вопрос
+     */
+    public void setTests(Collection<Test> tests) {
+        this.tests = tests;
     }
 }

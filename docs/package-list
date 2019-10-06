@@ -1,0 +1,7 @@
+ru.kamchatgtu.studium.DAO
+ru.kamchatgtu.studium.DAO.impl
+ru.kamchatgtu.studium.engine
+ru.kamchatgtu.studium.entity
+ru.kamchatgtu.studium.rest
+ru.kamchatgtu.studium.rest.service
+test.java
