@@ -58,7 +58,7 @@
         <c3p0.group>com.mchange</c3p0.group>
         <c3p0.version>0.9.5.2</c3p0.version>
         <jackson.group>com.fasterxml.jackson.core</jackson.group>
-        <jackson.version>2.9.7</jackson.version>
+        <jackson.version>2.10.0</jackson.version>
         <spring.group>org.springframework</spring.group>
         <spring.security.group>org.springframework.security</spring.security.group>
         <spring.version>5.0.0.RELEASE</spring.version>
