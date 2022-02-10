@@ -54,7 +54,7 @@
         <mail.group>javax.mail</mail.group>
         <mail.version>1.4.7</mail.version>
         <hibernate.group>org.hibernate</hibernate.group>
-        <hibernate.version>5.3.7.Final</hibernate.version>
+        <hibernate.version>5.4.24.Final</hibernate.version>
         <c3p0.group>com.mchange</c3p0.group>
         <c3p0.version>0.9.5.2</c3p0.version>
         <jackson.group>com.fasterxml.jackson.core</jackson.group>
