@@ -61,7 +61,7 @@
         <jackson.version>2.9.7</jackson.version>
         <spring.group>org.springframework</spring.group>
         <spring.security.group>org.springframework.security</spring.security.group>
-        <spring.version>5.0.0.RELEASE</spring.version>
+        <spring.version>5.3.18</spring.version>
     </properties>
 
     <dependencies>
